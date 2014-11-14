@@ -1,8 +1,5 @@
-.sidebar{
-	background-color: #bbd8e9;
-	width: 20%;
-}
-.content{
-	width: 77.5%;
-	margin-left: 2.5%;
+.pull-down {
+  display: table-cell;
+  vertical-align: bottom;
+  float: none;
 }

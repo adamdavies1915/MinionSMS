@@ -11,9 +11,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="settings.html">Settings</a></li>
-            <li><a href="help.html">Help</a></li>
+            <li><a href="index.php">Dashboard</a></li>
+            <li><a href="settings.php">Settings</a></li>
+            <li><a href="help.php">Help</a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
           <!-- for searches: -->
