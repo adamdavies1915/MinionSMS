@@ -6,14 +6,18 @@
     <div class="container-fluid text-center">
       <div class="row">
         <h1 class="page-header">Welcome, (name).</h1>
-        <h3> What would you like to do today? </h3>
+        <p class="lead"> What would you like to do today? </p>
         <br/>
         <div class="row" style="width:100%;">
           <div class="col-md-3 col-md-offset-3">
-            <h4><span class="glyphicon glyphicon-bullhorn"></span><br/>Send and Manage<br/> Mass Messages</h4>
+            <a href="./mass.php">
+              <h4><span class="glyphicon glyphicon-bullhorn"></span><br/>Send and Manage<br/> Mass Messages</h4>
+            </a>
           </div>
           <div class="col-md-3">
-            <h4><span class="glyphicon glyphicon-envelope"></span><br/>Monitor and Manage<br/> Incoming Orders</h4>
+            <a href="./orders.php">
+              <h4><span class="glyphicon glyphicon-envelope"></span><br/>Monitor and Manage<br/> Incoming Orders</h4>
+            </a>
           </div>
         </div>
       </div>
