@@ -16,7 +16,6 @@
               <li><a href="">Etc.</a></li>
             </ul>
           </div>
-          <?php include('./latest.php'); ?>
         </div>
       </div>
     </div>

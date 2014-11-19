@@ -5,8 +5,7 @@
 
     <div class="container-fluid text-center">
       <div class="row">
-        <h1 class="page-header">Welcome, (name).</h1>
-        <p class="lead"> What would you like to do today? </p>
+        <h1 class="page-header">Welcome, (name). <small>What would you like to do today?</small></h1>
         <br/>
         <div class="row" style="width:100%;">
           <div class="col-md-3 col-md-offset-3">

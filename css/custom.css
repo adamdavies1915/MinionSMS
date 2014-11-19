@@ -3,3 +3,7 @@
   vertical-align: bottom;
   float: none;
 }
+.dropdown-menu .glyph{
+	width:100%;
+	height:100%;
+}
