@@ -28,23 +28,7 @@
 							<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
 									Automatic replies on first and subsequent texts from a number, time periods, etc.
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
+									<?php include('./exampleaccordioncontent.php'); ?>
 								</div>
 							</div>
 						</div>
@@ -59,23 +43,7 @@
 							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 								<div class="panel-body">
 									Ignore texts if certain phrases aren't included
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
+									<?php include('./exampleaccordioncontent.php'); ?>
 								</div>
 							</div>
 						</div>
@@ -90,23 +58,7 @@
 							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								<div class="panel-body">
 									Notify for certain phrases sent in texts
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
-									<br/>
+									<?php include('./exampleaccordioncontent.php'); ?>
 								</div>
 							</div>
 						</div>

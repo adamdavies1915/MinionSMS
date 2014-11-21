@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <?php include('./masssnav.php'); ?>
+        <?php include('./massnav.php'); ?>
         <div class="main col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
           <h1 class="page-header">Send a mass message</h1>
           <div class="well">
