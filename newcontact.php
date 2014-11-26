@@ -32,7 +32,6 @@
               <li><a href="">Save</a></li>
             </ul>
           </div>
-          <?php include('./latest.php'); ?>
         </div>
       </div>
     </div>

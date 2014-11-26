@@ -14,9 +14,7 @@
 			<select><option value="Undefined">Undefined</option><option value="Employees">Employees</option><option value="Customers">Customers</option></select>
             
 			<form method="post" action="">
-				<textarea name="comments" cols="25" rows="5">
-				Enter message here...
-				</textarea><br>
+				<textarea name="comments" cols="25" rows="5">Enter message here...</textarea><br>
 				<input type="submit" value="Send" />
 			</form>
 			
@@ -25,7 +23,6 @@
               <li><a href="./mass.php">Go back</a></li>
             </ul>
           </div>
-          <?php include('./latest.php'); ?>
         </div>
       </div>
     </div>

@@ -1,3 +1,6 @@
+body{
+	scroll:visible;
+}
 .pull-down {
   display: table-cell;
   vertical-align: bottom;
