@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
 				"elemnt",
 				"element-at"
 			],
@@ -463,7 +467,7 @@
 			"file": "header.php",
 			"settings":
 			{
-				"buffer_size": 992,
+				"buffer_size": 1078,
 				"line_ending": "Windows"
 			}
 		},
@@ -471,7 +475,7 @@
 			"file": "latest.php",
 			"settings":
 			{
-				"buffer_size": 599,
+				"buffer_size": 883,
 				"line_ending": "Windows"
 			}
 		},
@@ -497,62 +501,6 @@
 			{
 				"buffer_size": 1042,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "mass.php",
-			"settings":
-			{
-				"buffer_size": 947,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "masscontacts.php",
-			"settings":
-			{
-				"buffer_size": 1038,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "massnav.php",
-			"settings":
-			{
-				"buffer_size": 2100,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "navbarexample.php",
-			"settings":
-			{
-				"buffer_size": 827,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "sendmass.php",
-			"settings":
-			{
-				"buffer_size": 984,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "newcontact.php",
-			"settings":
-			{
-				"buffer_size": 1142,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "newtemplate.php",
-			"settings":
-			{
-				"buffer_size": 7907,
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -615,7 +563,7 @@
 			"file": "css/custom.css",
 			"settings":
 			{
-				"buffer_size": 1631,
+				"buffer_size": 1656,
 				"line_ending": "Windows"
 			}
 		},
@@ -688,6 +636,13 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/IP15/newtemplate.php",
+		"/C/wamp/www/IP15/newcontact.php",
+		"/C/wamp/www/IP15/sendmass.php",
+		"/C/wamp/www/IP15/navbarexample.php",
+		"/C/wamp/www/IP15/massnav.php",
+		"/C/wamp/www/IP15/masscontacts.php",
+		"/C/wamp/www/IP15/mass.php",
 		"/C/wamp/www/IP15/IP15frontend.sublime-workspace",
 		"/C/wamp/www/IP15/IP15frontend.sublime-project",
 		"/C/wamp/www/IP15/coverTemplate.php",
@@ -698,7 +653,6 @@
 		"/C/wamp/www/IP15/loginTemplate.html",
 		"/C/wamp/www/IP15/mainmenu.php",
 		"/C/wamp/www/IP15/loginTemplate.php",
-		"/C/wamp/www/IP15/navbarexample.php",
 		"/C/wamp/www/IP15/orders.php",
 		"/C/wamp/www/IP15/footer.php",
 		"/C/wamp/www/IP15/queue.php",
@@ -706,7 +660,6 @@
 		"/C/wamp/www/IP15/rules.php",
 		"/C/wamp/www/IP15/outstanding.php",
 		"/C/wamp/www/IP15/css/custom.css",
-		"/C/wamp/www/IP15/newtemplate.php",
 		"/C/wamp/www/IP15/topnav.php",
 		"/C/Users/Ryan/Drive/Uni/Programming/Lisp/CW1/lambda.lisp",
 		"/C/wamp/www/pitcher/js/pitchdetect.js",
@@ -810,12 +763,7 @@
 		"/C/wamp/www/act_club_create.php",
 		"/C/wamp/www/templates/window/club_create.html.twig",
 		"/C/wamp/www/templates/window/tournament_create.html.twig",
-		"/C/wamp/www/templates/window/about.html.twig",
-		"/C/wamp/www/templates/club/create.html.twig",
-		"/C/wamp/www/instructor/act_tournament_create.php",
-		"/C/wamp/www/global_mysql.php",
-		"/C/wamp/www/global_mysql - Copy.php",
-		"/C/wamp/www/wiredmad/vendor/bin/doctrine.php"
+		"/C/wamp/www/templates/window/about.html.twig"
 	],
 	"find":
 	{
@@ -834,6 +782,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"   ",
+			"  ",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"\n ",
+			"errorMsg",
 			"latest",
 			"btn-group-justified",
 			"conent",
@@ -946,22 +909,7 @@
 			"\"",
 			"==\">\")",
 			"//",
-			"\")",
-			")",
-			";",
-			"return",
-			"zero",
-			"lf",
-			"double",
-			"register",
-			"img",
-			"page_source",
-			"/x",
-			"-",
-			")\n",
-			"messages",
-			"results",
-			"$entityManage"
+			"\")"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -983,7 +931,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -999,8 +947,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								459,
+								459
 							]
 						],
 						"settings":
@@ -1011,7 +959,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 21,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1020,15 +968,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 992,
+						"buffer_size": 1078,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								202,
-								202
+								750,
+								750
 							]
 						],
 						"settings":
@@ -1041,7 +989,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 20,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1050,15 +998,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 599,
+						"buffer_size": 883,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								490,
+								490
 							]
 						],
 						"settings":
@@ -1068,10 +1016,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 64.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 19,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1098,10 +1046,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 575.0,
+						"translation.y": 215.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1117,8 +1065,8 @@
 						"selection":
 						[
 							[
-								384,
-								388
+								502,
+								502
 							]
 						],
 						"settings":
@@ -1131,7 +1079,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 17,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1161,221 +1109,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "mass.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 947,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								849,
-								849
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "masscontacts.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1038,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								187,
-								187
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "massnav.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2100,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "navbarexample.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 827,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "sendmass.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 984,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								712,
-								712
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "newcontact.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1142,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1044,
-								1044
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 383.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "newtemplate.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7907,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
 					"file": "orders.php",
 					"semi_transient": false,
 					"settings":
@@ -1401,11 +1139,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 7,
 					"file": "ordersnav.php",
 					"semi_transient": false,
 					"settings":
@@ -1431,11 +1169,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 8,
 					"file": "outstanding.php",
 					"semi_transient": false,
 					"settings":
@@ -1461,11 +1199,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 9,
 					"file": "queue.php",
 					"semi_transient": false,
 					"settings":
@@ -1491,11 +1229,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 10,
 					"file": "README.md",
 					"semi_transient": false,
 					"settings":
@@ -1519,11 +1257,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 11,
 					"file": "rules.php",
 					"semi_transient": false,
 					"settings":
@@ -1549,11 +1287,11 @@
 						"translation.y": 300.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 12,
 					"file": "exampleaccordioncontent.php",
 					"semi_transient": false,
 					"settings":
@@ -1579,24 +1317,24 @@
 						"translation.y": 1091.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 13,
 					"file": "css/custom.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1631,
+						"buffer_size": 1656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1631,
-								1631
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1607,11 +1345,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 14,
 					"file": "topnav.php",
 					"semi_transient": false,
 					"settings":
@@ -1637,7 +1375,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
