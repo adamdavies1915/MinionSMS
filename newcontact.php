@@ -12,25 +12,24 @@
             Please fill in the following details
 			<p></p>
 			
-			<form>
-				First name:<br>
-					<input type="text" name="firstname">
-				<br>
-				Last name:<br>
-					<input type="text" name="lastname">
-				<br>
-				Phone number:<br>
-					<input type="text" name="phonenumber">
-				<br>
-				Contact group:<br>
-					<input type="text" name="lastname"> or <select><option value="Undefined">Undefined</option><option value="Employees">Employees</option><option value="Customers">Customers</option></select>
-			</form>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Forename">
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Surname">
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Phone number">
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Contact Group">
+			</div>
+			<br>
 			
+			<a href=""><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button></a>
+			<br>
+			<a href="./mass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Back without saving</button></a>
 			
-            <ul>
-              <li><a href="./mass.php">Go back</a></li>
-              <li><a href="">Save</a></li>
-            </ul>
           </div>
         </div>
       </div>

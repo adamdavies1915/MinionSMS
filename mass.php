@@ -11,13 +11,11 @@
           <div class="well">
             Welcome to the mass messaging service<br/>
             What would you like to do?
-            <ul>
-              <li><a href="./masscontacts.php">View Contacts and contact groups</a></li>
-              <li><a href="./newcontact.php">Add a new contact</a></li>
-			        <li><a href="./sendmass.php">Send a mass message</a></li>
-              <li><a href="">Do something else</a></li>
-              <li><a href="">Do another thing</a></li>
-            </ul>
+			<br><br>
+			
+			<a href="./masscontacts.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> View contacts</button></a><br>
+			<a href="./newcontact.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new contact</button></a><br>
+			<a href="./sendmass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send a mass message</button></a><br>
           </div>
         </div>
       </div>

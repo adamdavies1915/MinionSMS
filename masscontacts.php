@@ -9,29 +9,82 @@
         <div class="main col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
           <h1 class="page-header">Contact groups</h1>
           <div class="well">
-            Contact groups <select><option value="Undefined">Undefined</option><option value="Employees">Employees</option><option value="Customers">Customers</option></select>
-            
-			<table style="width:30%">
-				<tr>
-					<td>Jane</td>
-					<td>Doe</td> 
-					<td>077123456789</td>
-					<td><a href="">Edit</a></td>
-				</tr>
-				<tr>
-					<td>Bob</td>
-					<td>Thebuilder</td> 
-					<td>077123456781</td>
-					<td><a href="">Edit</a></td>
-				</tr>
-			
-			<ul>
-              <li><a href="./newcontact.php">Add new contact</a></li>
-            </ul>
+            Review, edit and add new contacts here!
+			<br>
+			<br>
+            <a href="./newcontact.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new contact</button></a>
           </div>
+		  
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						Contact group
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Customers</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Employees</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Undefined</a></li>
+					</ul>
+				</div>
+			</div>
+
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>First</th> 
+							<th>Last</th>
+							<th>Number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Jane</td>
+							<td>Doe</td> 
+							<td>077123456789</td>
+							<td><div class="dropdown pull-right">
+								<div class="pull-right">
+									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+										Action
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-ok"></span> Edit</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-remove"></span> Delete</a></li>
+									</ul>
+								</div>
+							</div></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Bob</td>
+							<td>Thebuilder</td> 
+							<td>077123456781</td>
+							<td><div class="dropdown pull-right">
+								<div class="pull-right">
+									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+										Action
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-ok"></span> Edit</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-remove"></span> Delete</a></li>
+									</ul>
+								</div>
+							</div></td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+		  
         </div>
+		</div>
       </div>
-    </div>
     <?php include('./footer.php'); ?>
     
 </body></html>
