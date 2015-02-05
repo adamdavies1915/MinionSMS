@@ -4,13 +4,29 @@
   </div>
 </div>
 <script>
-  var myFirebaseRef = new Firebase("https://group15.firebaseio.com/");
+  var myFirebaseRef = new Firebase("https://group15.firebaseio.com/messages");
 
   //TEST DATA
   myFirebaseRef.push({
     number : "07731784340",
     message: "Hello, world!"
   });
+  myFirebaseRef = new Firebase("https://group15.firebaseio.com/groups");
+  myFirebaseRef.push({
+    name : "Default"
+  });
+  myFirebaseRef = new Firebase("https://group15.firebaseio.com/groupcontact");
+  myFirebaseRef.push({
+    contactid:"someid",
+    groupid:"anotherid"
+  });
+  myFirebaseRef = new Firebase("https://group15.firebaseio.com/contact");
+  myFirebaseRef.push({
+    name:"Rachel",
+    number:"07731784340"
+  });
+
+  myFirebaseRef = new Firebase("https://group15.firebaseio.com/messages");
   //END DATA
   //TODO: NEEDS TIMESTAMP!
   var tableContent ="";
