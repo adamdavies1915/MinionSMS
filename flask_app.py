@@ -6,30 +6,18 @@ from firebase import firebase
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-# def sendResponse():
-#     # senderNumber = request.values.get('From', None)
-#     # messageBody = request.values.get('Body', None)
 
-#     #print senderNumber
-#     #print messageBody
-#     # firebasePost = 'hello'
-
-#     #print "message received"
-#     # response = twilio.twiml.Response()
-#     # response.message(messageBody)
-
-#     database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
-#     messageData = [{'message' : 'Testing3', 'number' : '07807709499'}]
-
-#     result = database.post('/messages', messageData)
-#     print result
 
 @app.route('/twilioapi', methods=['GET'])
 def incoming_message():
 
-    #first log the message
+    #get details of incoming message
+    senderNumber = request.values.get('From', None)
+    messageBody = request.values.get('Body', None)
+
+    #then log the message
     database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
-    messageData = [{'message' : 'Testing4', 'number' : '07807709499'}]
+    messageData = {'message' : messageBody, 'number' : senderNumber}
     result = database.post('/messages', messageData)
     return "ok"
 
