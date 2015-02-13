@@ -29,13 +29,32 @@
             <br>
 			
 			<div class="form-group">
-				<label for="comment">Message content:</label>
-				<textarea class="form-control" rows="5" id="comment"></textarea>
+				<label for="messageText">Message content:</label>
+				<textarea class="form-control" rows="5" id="messageText"></textarea>
 			</div>
 			
-			<a href=""><button id="send" type="button" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send</button></a>
+			<button id="send" type="button" class="btn btn-default" data-toggle="modal" data-target=".modal">
+				<span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send
+			</button>
 			<a href="./mass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Back without sending</button></a>
 			
+
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      <div class="modal-content">
+
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			          <h4 class="modal-title" id="mySmallModalLabel">Your message is being sent...</h4>
+			        </div>
+			        <div class="modal-body">
+			          Status: Sending...
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
           </div>
         </div>
       </div>
@@ -43,23 +62,15 @@
     <?php include('./footer.php'); ?>
     <script>
 	    function transmit(){
-
-	    	var url = "http://group15.pythonanywhere.com/webapi/send";
-			var method = "POST";
-			var postData = "number : 07731784340, message : Hello World!";
-			var async = true;
-			var request = new XMLHttpRequest();
-			// request.onload = function () {
-			//    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
-			//    var data = request.responseText; // Returned data, e.g., an HTML document.
-			// }
-			//NEEDED FOR FEEDBACK
-
-			request.open(method, url, async);
-
-			request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			
-			request.send(postData);
+	    	document.getElementById("messageText").disabled = true;
+	    	var myFirebaseRef = new Firebase("https://group15.firebaseio.com/outgoing");
+	    	myFirebaseRef.push({
+	    		groupid : "someId - use some other number for now!",
+			    message: document.getElementById("messageText").value,
+			    delivered : 0
+			});
+	    	document.getElementById("messageText").disabled = false;
+	    	document.getElementById("messageText").value = "";
 		}
 
 		document.getElementById("send").addEventListener("click", transmit, false);
