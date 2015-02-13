@@ -63,12 +63,13 @@
     <script>
 	    function transmit(){
 	    	document.getElementById("messageText").disabled = true;
+	    	// CHANGE ME! HTTP REQUEST
 	    	var myFirebaseRef = new Firebase("https://group15.firebaseio.com/outgoing");
 	    	myFirebaseRef.push({
 	    		groupid : "someId - use some other number for now!",
-			    message: document.getElementById("messageText").value,
-			    delivered : 0
+			    message: document.getElementById("messageText").value
 			});
+	    	//
 	    	document.getElementById("messageText").disabled = false;
 	    	document.getElementById("messageText").value = "";
 		}
