@@ -1,18 +1,37 @@
 from flask import Flask, request, redirect, jsonify
 import twilio.twiml
+#import json
+from firebase import firebase
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-def sendResponse():
-    print "message received"
-    response = twilio.twiml.Response()
-    response.message("Auto-response")
-    return str(response)
+# def sendResponse():
+#     # senderNumber = request.values.get('From', None)
+#     # messageBody = request.values.get('Body', None)
 
-@app.route('/hello', methods=['GET'])
-def get_tasks():
-    return "hello"
+#     #print senderNumber
+#     #print messageBody
+#     # firebasePost = 'hello'
+
+#     #print "message received"
+#     # response = twilio.twiml.Response()
+#     # response.message(messageBody)
+
+#     database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
+#     messageData = [{'message' : 'Testing3', 'number' : '07807709499'}]
+
+#     result = database.post('/messages', messageData)
+#     print result
+
+@app.route('/twilioapi', methods=['GET'])
+def incoming_message():
+
+    #first log the message
+    database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
+    messageData = [{'message' : 'Testing4', 'number' : '07807709499'}]
+    result = database.post('/messages', messageData)
+    return "ok"
 
 @app.route("/webapi/masssms", methods=['POST'])
 def sendSms():
