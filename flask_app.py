@@ -2,8 +2,13 @@ from flask import Flask, request, redirect, jsonify
 import twilio.twiml
 #import json
 from firebase import firebase
+from flask.ext.cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 @app.route("/", methods=['GET', 'POST'])
 
@@ -22,12 +27,13 @@ def incoming_message():
     return "ok"
 
 @app.route("/webapi/masssms", methods=['POST'])
+@cross_origin()
 def sendSms():
 	# if not request.json: # or not "title" in request.json:
 	# 	abort(400) #currently will accept any post request
-	print "ok"
-	print request.json
-	return jsonify({'number': 2}), 201
+    # print request.json
+	return "ok"
+# 	return jsonify({'number': 2}), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
