@@ -36,17 +36,6 @@
     </div>
     <?php include('./footer.php'); ?>
     <script>
-	    function transmit(){
-	    	//document.getElementById("contactForm").disabled = true;
-	    	var myFirebaseRef = new Firebase("https://group15.firebaseio.com/contact");
-	    	myFirebaseRef.push({
-	    		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
-			    number: document.getElementById("numberText").value,
-			    groupid: document.getElementById("groupText").value
-			});
-			//ADD GROUPCONTACT STUFF
-
-		}
-		document.getElementById("create").addEventListener("click", transmit, false);
+		document.getElementById("create").addEventListener("click", createContact, false);
     </script>
 </body></html>

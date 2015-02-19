@@ -61,31 +61,6 @@
     </div>
     <?php include('./footer.php'); ?>
     <script>
-	    function transmit(){
-	    	document.getElementById("messageText").disabled = true;
-
-			var url = "http://group15.pythonanywhere.com/webapi/masssms";
-			var method = "POST";
-			var postData = "number : 07731784340, message : Hello World!";
-			var async = true;
-			var request = new XMLHttpRequest();
-			// request.onload = function () {
-			//    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
-			//    var data = request.responseText; // Returned data, e.g., an HTML document.
-			// }
-			//NEEDED FOR FEEDBACK
-
-			request.open(method, url, async);
-
-			request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			
-			request.send(postData);
-
-
-	    	document.getElementById("messageText").disabled = false;
-	    	document.getElementById("messageText").value = "";
-		}
-
-		document.getElementById("send").addEventListener("click", transmit, false);
+		document.getElementById("send").addEventListener("click", transmitMassMessage, false);
     </script>
 </body></html>
