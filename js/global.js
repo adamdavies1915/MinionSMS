@@ -1,3 +1,8 @@
+function openFBR(attr)
+{
+	return new Firebase("https://group15.firebaseio.com/"+attr);
+}
+
 function transmitMassMessage()
 {
 	document.getElementById("messageText").disabled = true;
@@ -31,30 +36,39 @@ function displayOutstanding(snapshot)
 	document.getElementById("outstandingTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
 
-function createContact(){
-	    	//document.getElementById("contactForm").disabled = true;
-	    	var myFirebaseRef = new Firebase("https://group15.firebaseio.com/contact");
-	    	myFirebaseRef.push({
-	    		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
-			    number: document.getElementById("numberText").value,
-			    groupid: document.getElementById("groupText").value
-			});
-			//ADD GROUPCONTACT STUFF
+function createContact()
+{
+	//document.getElementById("contactForm").disabled = true;
+	var contact = (openFBR("contact"));
+	contact.push({
+		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
+	    number: document.getElementById("numberText").value,
+	    groupid: document.getElementById("groupText").value
+	});
+	//ADD GROUPCONTACT STUFF
 
-		}
+}
 
-function createContactGroup(){
-	    	//document.getElementById("contactForm").disabled = true;
-	    	var myFirebaseRef = new Firebase("https://group15.firebaseio.com/group");
-	    	myFirebaseRef.push({
-	    		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
-			    number: document.getElementById("numberText").value,
-			    groupid: document.getElementById("groupText").value
-			});
+function createContactGroup()
+{
+	//document.getElementById("contactForm").disabled = true;
+	var group = (openFBR("group"));
+	group.push({
+	    name: document.getElementById("groupText").value
+	});
 
-		}
+}
 
-function displayLatest(snapshot){
+function addContactToGroup(groupID,contactID)
+{
+	var groupcontact = (openFBR("group/"+groupID+"/contacts"));
+	groupcontact.push({
+	    contactid: contactID
+	});
+}
+
+function displayLatest(snapshot)
+{
 	var tableContent ="";
     snapshot.forEach(function(ss) {
       tableContent = tableContent+"<tr><td>"+ss.val().number+"</td><td>"+ss.val().message+"</td></tr>";
@@ -62,4 +76,15 @@ function displayLatest(snapshot){
 
     var table = "<table class=\"table\"><thead><tr><th>Latest Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
     document.getElementById("latestTable").innerHTML = table;
+}
+
+function displayContacts(snapshot)
+{
+	var tableContent ="";
+    snapshot.forEach(function(ss) {
+      tableContent = tableContent+"<tr><td>"+ss.val().number+"</td><td>"+ss.val().message+"</td></tr>";
+    });
+
+    var table = "<table class=\"table\"><thead><tr><th>Latest Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+    document.getElementById("contactsTable").innerHTML = table;
 }

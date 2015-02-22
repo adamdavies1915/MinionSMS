@@ -5,8 +5,8 @@
 </div>
 <script>
 
-  var myFirebaseRef = (new Firebase("https://group15.firebaseio.com/messages"))
+  var messages = (openFBR("messages"))
                           .limitToLast(3);  
-  myFirebaseRef.on("value", displayLatest);
+  messages.on("value", displayLatest);
   
 </script>
