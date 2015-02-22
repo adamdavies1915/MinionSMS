@@ -30,9 +30,9 @@
 						</ul>
 					</div>
 				</div>
-
+				<div class="table-responsive" id="contactsTable">
 					<!-- Table -->
-					<table class="table">
+					<!-- <table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -41,8 +41,8 @@
 								<th>Number</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody> -->
+							<!-- <tr>
 								<td>2</td>
 								<td>Bob</td>
 								<td>Thebuilder</td> 
@@ -60,10 +60,10 @@
 										</ul>
 									</div>
 								</div></td>
-							</tr>
-						</tbody>
-					</table>
-
+							</tr> -->
+						<!-- </tbody>
+					</table> -->
+				</div>
 					
 			</div>
         </div>
@@ -71,7 +71,7 @@
       </div>
     <?php include('./footer.php'); ?>
     <script>
-    	//TODO!
-    	//document.getElementById("create").addEventListener("click", createContactGroup, false);
+    	var contacts = (openFBR("contact")).orderByChild("name");
+    	contacts.on("value", displayContacts);
     </script>
 </body></html>
