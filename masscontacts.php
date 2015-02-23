@@ -31,38 +31,6 @@
 					</div>
 				</div>
 				<div class="table-responsive" id="contactsTable">
-					<!-- Table -->
-					<!-- <table class="table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>First</th> 
-								<th>Last</th>
-								<th>Number</th>
-							</tr>
-						</thead>
-						<tbody> -->
-							<!-- <tr>
-								<td>2</td>
-								<td>Bob</td>
-								<td>Thebuilder</td> 
-								<td>077123456781</td>
-								<td><div class="dropdown pull-right">
-									<div class="pull-right">
-										<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-											Action
-											<span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-ok"></span> Edit</a></li>
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-ok"></span> Edit</a></li>
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span aria-hidden="true" class="pull-left glyph glyph-remove"></span> Delete</a></li>
-										</ul>
-									</div>
-								</div></td>
-							</tr> -->
-						<!-- </tbody>
-					</table> -->
 				</div>
 					
 			</div>
