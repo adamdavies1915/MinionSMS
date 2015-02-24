@@ -41,5 +41,6 @@
     <script>
     	var contacts = (openFBR("contact")).orderByChild("name");
     	contacts.on("value", displayContacts);
+    	document.getElementById("contactsTable").addEventListener("click", contactsTableFunctionality, false);
     </script>
 </body></html>

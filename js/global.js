@@ -80,16 +80,67 @@ function displayLatest(snapshot)
 
 function displayContacts(snapshot)
 {
-	var groups="<li><a tabindex=\"-1\" href=\"#\">Add to </a></li>";
-	var x=0;
-	var tableContent ="";
-	var surname="";
-    snapshot.forEach(function(ss) {
-		x++;
-		if((surname=ss.val().name.split(" ")[1])==undefined) surname = "-";
-		tableContent = tableContent+"<tr><td>"+x+"</td><td>"+ss.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+ss.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"#\">Edit</a></li><li><a tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groups+"</ul>";
-    });
+	var contactGroups = openFBR("group");
+	var groupsList="";
+	contactGroups.once("value", function(groupsnapshot){
+		groupsnapshot.forEach(function(ss){
+			groupsList += "<li><a id=\""+ss.key()+"\" class=\"add\" tabindex=\"-1\" href=\"#\">Add to "+ss.val().name+"</a></li>";
+		});
 
-    var table = "<table class=\"table\"><thead><tr><th>#</th><th>First</th><th>Last</th><th>Number</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
-    document.getElementById("contactsTable").innerHTML = table;
+		var x=0;
+		var tableContent ="";
+		var surname="";
+	    snapshot.forEach(function(ss) {
+			x++;
+			if((surname=ss.val().name.split(" ")[1])==undefined) surname = "-";
+			tableContent = tableContent+"<tr id=\""+ss.key()+"\"><td>"+x+"</td><td>"+ss.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+ss.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"#\">Edit</a></li><li><a class=\"delete\" tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groupsList+"</ul>";
+	    });
+
+	    var table = "<table class=\"table\"><thead><tr><th>#</th><th>First</th><th>Last</th><th>Number</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+	    document.getElementById("contactsTable").innerHTML = table;
+	});
+}
+
+function contactsTableFunctionality(evt)
+{
+	if((!evt.target.id=="")||
+	   (!evt.target.id=="dropdownMenu"))
+	{
+		if(evt.target.className=="add")
+		{
+			var groupid = evt.target.id;
+			var contactid =	evt.target.parentElement
+				.parentElement
+				.parentElement
+				.parentElement
+				.parentElement
+				.parentElement.id;
+			addContactToGroup(groupid,contactid);
+		}
+	}
+
+	if(evt.target.className=="delete")
+	{
+		console.dir(evt.target.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			);
+		//TODO: IJMPLEMENT!
+	}
+	if(evt.target.className=="edit")
+	{
+		console.dir(evt.target.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			);
+		//TODO: IMPLEMENT!
+	}
+
+
 }
