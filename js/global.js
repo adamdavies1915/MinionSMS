@@ -61,16 +61,30 @@ function createContactGroup()
 
 function addContactToGroup(groupID,contactID)
 {
-	var groupcontact = (openFBR("group/"+groupID+"/contacts"));
-	groupcontact.push({
+	var groupcontacts = (openFBR("group/"+groupID+"/contacts"));
+	groupcontacts.push({
 	    contactid: contactID
+	});
+}
+
+function deleteContactFromGroup(groupID, contactID)
+{
+	var groupcontacts = (openFBR("group/"+groupID+"/contacts"));
+	groupcontacts.once("value",function(ss){
+	    ss.forEach(function(contact){
+	    	if(contact.val().contactid==contactID) 
+	    	{
+	    		console.dir("equality!");
+	    		openFBR("group/"+groupID+"/contacts/"+contact.key()).remove();
+	    	}
+	    });
 	});
 }
 
 function displayLatest(snapshot)
 {
 	var tableContent ="";
-    snapshot.forEach(function(ss) {
+    snapshot.forEach(function(ss){
       tableContent = tableContent+"<tr><td>"+ss.val().number+"</td><td>"+ss.val().message+"</td></tr>";
     });
 
@@ -81,19 +95,32 @@ function displayLatest(snapshot)
 function displayContacts(snapshot)
 {
 	var contactGroups = openFBR("group");
-	var groupsList="";
+	
 	contactGroups.once("value", function(groupsnapshot){
-		groupsnapshot.forEach(function(ss){
-			groupsList += "<li><a id=\""+ss.key()+"\" class=\"add\" tabindex=\"-1\" href=\"#\">Add to "+ss.val().name+"</a></li>";
-		});
-
 		var x=0;
 		var tableContent ="";
 		var surname="";
-	    snapshot.forEach(function(ss) {
+	    snapshot.forEach(function(contactsnap){
+	    	
+	    	var groupsList="";
+	    	groupsnapshot.forEach(function(groupsnap){
+				var del=false;
+				groupsnap.child("contacts").forEach(function(groupcontactsnap){
+					if(groupcontactsnap.val().contactid==contactsnap.key()) del = true;
+				})
+				if(!del)
+				{
+					groupsList += "<li><a id=\""+groupsnap.key()+"\" class=\"add\" tabindex=\"-1\" href=\"#\">Add to "+groupsnap.val().name+"</a></li>";
+				}
+				else
+				{
+					groupsList += "<li><a id=\""+groupsnap.key()+"\" class=\"rem\" tabindex=\"-1\" href=\"#\">Remove from "+groupsnap.val().name+"</a></li>";
+				}
+			});
+
 			x++;
-			if((surname=ss.val().name.split(" ")[1])==undefined) surname = "-";
-			tableContent = tableContent+"<tr id=\""+ss.key()+"\"><td>"+x+"</td><td>"+ss.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+ss.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"#\">Edit</a></li><li><a class=\"delete\" tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groupsList+"</ul>";
+			if((surname=contactsnap.val().name.split(" ")[1])==undefined) surname = "-";
+			tableContent = tableContent+"<tr id=\""+contactsnap.key()+"\"><td>"+x+"</td><td>"+contactsnap.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+contactsnap.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"#\">Edit</a></li><li><a class=\"delete\" tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groupsList+"</ul>";
 	    });
 
 	    var table = "<table class=\"table\"><thead><tr><th>#</th><th>First</th><th>Last</th><th>Number</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
@@ -116,6 +143,18 @@ function contactsTableFunctionality(evt)
 				.parentElement
 				.parentElement.id;
 			addContactToGroup(groupid,contactid);
+		}
+		if(evt.target.className=="rem")
+		{
+		console.dir("entered");
+		var groupid = evt.target.id;
+		var contactid =	evt.target.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement
+			.parentElement.id;
+		deleteContactFromGroup(groupid,contactid);
 		}
 	}
 
