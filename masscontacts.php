@@ -13,6 +13,7 @@
 				<br>
 				<br>
 				<a href="./newcontact.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new contact</button></a>
+				<a href="./newcontactgroup.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new group</button></a>
 			</div>
 			  
 			<div class="panel panel-default">
@@ -41,6 +42,11 @@
     <script>
     	var contacts = (openFBR("contact")).orderByChild("name");
     	contacts.on("value", displayContacts);
+    	var groups = (openFBR("group"));
+    	groups.on("value", function(snapshot){
+    		contacts.once("value", displayContacts);
+    	});
+    	// needs an event listener on contactgroup changes!
     	document.getElementById("contactsTable").addEventListener("click", contactsTableFunctionality, false);
     </script>
 </body></html>

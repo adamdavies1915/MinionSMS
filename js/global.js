@@ -42,11 +42,24 @@ function createContact()
 	var contact = (openFBR("contact"));
 	contact.push({
 		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
-	    number: document.getElementById("numberText").value,
-	    groupid: document.getElementById("groupText").value
+	    number: document.getElementById("numberText").value
 	});
-	//ADD GROUPCONTACT STUFF
 
+}
+
+function editContact(contactid)
+{
+	var exists = false;
+	var contacts = (openFBR("contact"));
+	contacts.once("value",function(contactsnap){
+		contactsnap.forEach(function(contact){
+			if(contact.key()==contactid) exists = true;
+		});
+		if(exists) contacts.child(contactid).set({
+			name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
+	    	number: document.getElementById("numberText").value
+		});
+	});
 }
 
 function createContactGroup()
@@ -74,7 +87,6 @@ function deleteContactFromGroup(groupID, contactID)
 	    ss.forEach(function(contact){
 	    	if(contact.val().contactid==contactID) 
 	    	{
-	    		console.dir("equality!");
 	    		openFBR("group/"+groupID+"/contacts/"+contact.key()).remove();
 	    	}
 	    });
@@ -120,12 +132,32 @@ function displayContacts(snapshot)
 
 			x++;
 			if((surname=contactsnap.val().name.split(" ")[1])==undefined) surname = "-";
-			tableContent = tableContent+"<tr id=\""+contactsnap.key()+"\"><td>"+x+"</td><td>"+contactsnap.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+contactsnap.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"#\">Edit</a></li><li><a class=\"delete\" tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groupsList+"</ul>";
+			tableContent = tableContent+"<tr id=\""+contactsnap.key()+"\"><td>"+x+"</td><td>"+contactsnap.val().name.split(" ")[0]+"</td><td>"+surname+"</td> <td>"+contactsnap.val().number+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"./newcontact.php?id="+contactsnap.key()+"\">Edit</a></li><li><a class=\"delete\" tabindex=\"-1\" href=\"#\">Delete</a></li><li class=\"divider\"></li>"+groupsList+"</ul>";
 	    });
 
 	    var table = "<table class=\"table\"><thead><tr><th>#</th><th>First</th><th>Last</th><th>Number</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 	    document.getElementById("contactsTable").innerHTML = table;
 	});
+}
+
+function deleteContact(contactid)
+{
+	openFBR("contact/"+contactid).remove();
+	openFBR("group").once("value", function(groupsnapshot){
+		groupsnapshot.forEach(function(group){
+			deleteContactFromGroup(group.key(),contactid);
+		});
+	});
+}
+
+function par6(evttarget)
+{
+	return evttarget.parentElement
+				.parentElement
+				.parentElement
+				.parentElement
+				.parentElement
+				.parentElement;
 }
 
 function contactsTableFunctionality(evt)
@@ -136,47 +168,29 @@ function contactsTableFunctionality(evt)
 		if(evt.target.className=="add")
 		{
 			var groupid = evt.target.id;
-			var contactid =	evt.target.parentElement
-				.parentElement
-				.parentElement
-				.parentElement
-				.parentElement
-				.parentElement.id;
+			var contactid =	par6(evt.target).id;
+			console.dir(par6(evt.target)
+			);
 			addContactToGroup(groupid,contactid);
 		}
 		if(evt.target.className=="rem")
 		{
-		console.dir("entered");
-		var groupid = evt.target.id;
-		var contactid =	evt.target.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement.id;
-		deleteContactFromGroup(groupid,contactid);
+			var groupid = evt.target.id;
+			var contactid =	par6(evt.target).id;
+			console.dir(par6(evt.target)
+			);
+			deleteContactFromGroup(groupid,contactid);
 		}
 	}
 
 	if(evt.target.className=="delete")
 	{
-		console.dir(evt.target.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			);
-		//TODO: IJMPLEMENT!
+		var contactid = par6(evt.target).id;
+		deleteContact(contactid);
 	}
 	if(evt.target.className=="edit")
 	{
-		console.dir(evt.target.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
-			.parentElement
+		console.dir(par6(evt.target)
 			);
 		//TODO: IMPLEMENT!
 	}

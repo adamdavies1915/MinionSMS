@@ -2,7 +2,6 @@
   <?php include('./header.php'); ?>
   <body>
     <?php include('./topnav.php'); ?>
-
     <div class="container-fluid">
       <div class="row">
         <?php include('./massnav.php'); ?>
@@ -10,23 +9,39 @@
           <h1 class="page-header">Edit/Add new contact group</h1>
           <div class="well" id="contactForm">
             Please fill in the following details
-			<p></p>
-			
-			<div class="input-group">
-				<input id = "groupText" type="text" class="form-control" placeholder="Group Name">
-			</div>
-			<br>
-			
-			<button id="create" type="button" class="btn btn-default"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button></a>
-			<br>
-			<a href="./mass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Back without saving</button>
-			
+            <p></p>
+            
+            <div class="input-group">
+              <input id = "groupText" type="text" class="form-control" placeholder="Group Name">
+            </div>
+            <br>
+            
+            <button id="create" type="button" class="btn btn-default" data-toggle="modal" data-target=".modal"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button></a>
+            <a href="./mass.php">Back without saving</a>
+            
           </div>
         </div>
       </div>
+      <!-- modal feedback -->
+      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Your message is being sent...</h4>
+              </div>
+              <div class="modal-body">
+                Status: Sending...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal feedback -->
     </div>
     <?php include('./footer.php'); ?>
     <script>
-		document.getElementById("create").addEventListener("click", createContactGroup, false);
+        document.getElementById("create").addEventListener("click", createContactGroup, false);
     </script>
-</body></html>
+  </body></html>
