@@ -19,19 +19,17 @@
 			<div class="panel panel-default">
 				<!-- Default panel contents -->
 				<div class="panel-heading">
-					<div class="dropdown">
+					<!-- <div class="dropdown">
 						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 							Contact group
 							<span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<ul id="dropdownGroupFilter" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Customers</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Employees</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Undefined</a></li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
-				<div class="table-responsive" id="contactsTable">
+				<div id="contactsTable">
 				</div>
 					
 			</div>
@@ -46,7 +44,6 @@
     	groups.on("value", function(snapshot){
     		contacts.once("value", displayContacts);
     	});
-    	// needs an event listener on contactgroup changes!
     	document.getElementById("contactsTable").addEventListener("click", contactsTableFunctionality, false);
     </script>
 </body></html>

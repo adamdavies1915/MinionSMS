@@ -27,15 +27,6 @@ function transmitMassMessage()
 	document.getElementById("messageText").value = "";
 }
 
-function displayOutstanding(snapshot)
-{
-	var tableContent ="";
-	snapshot.forEach(function(ss) {
-		tableContent = tableContent+"<tr><td>"+ss.val().number+"</td><td>"+ss.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Mark Done</a></li><li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span> Decline </a></li></ul></div></div></td></tr>";
-	});
-	document.getElementById("outstandingTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
-}
-
 function createContact()
 {
 	//document.getElementById("contactForm").disabled = true;
@@ -188,12 +179,39 @@ function contactsTableFunctionality(evt)
 		var contactid = par6(evt.target).id;
 		deleteContact(contactid);
 	}
-	if(evt.target.className=="edit")
+}
+
+function displayOutstanding(snapshot)
+{
+	var tableContent ="";
+	snapshot.forEach(function(messagesnap) {
+		if(!messagesnap.val().dealtwith)
+			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"markdone\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Mark Done</a></li><li role=\"presentation\"><a class=\"decline\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span> Decline </a></li></ul></div></div></td></tr>";
+	});
+	document.getElementById("outstandingTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+}
+
+function messageTableFunctionality(evt)
+{
+	if(evt.target.className=="decline")
 	{
-		console.dir(par6(evt.target)
-			);
-		//TODO: IMPLEMENT!
+		var messageid = par6(evt.target).id;
+		deleteMessage(messageid);
+		
 	}
+	if(evt.target.className=="markdone")
+	{
+		var messageid = par6(evt.target).id;
+		markMessageDone(messageid);
+	}
+}
 
+function deleteMessage(messageid)
+{
+	openFBR("messages/"+messageid).remove();
+}
 
+function markMessageDone(messageid)
+{
+	openFBR("messages/"+messageid+"/dealtwith").set(true);
 }
