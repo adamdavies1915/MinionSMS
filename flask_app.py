@@ -23,11 +23,12 @@ def incoming_message():
     #get details of incoming message
     sender = request.values.get('From', None)
     messageBody = request.values.get('Body', None)
+    dealtWith = False
 
     database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
 
     #then log the message
-    messageData = {'message' : messageBody, 'number' : sender}
+    messageData = {'dealtwith' : dealtWith, 'message' : messageBody, 'number' : sender}
     database.post('/messages', messageData)
 
     if 'order' in str(messageBody).lower():
