@@ -13,15 +13,12 @@
 						<br><br>
 						
 						<div class="dropdown">
-							<label for="dropdownMenu1">Contact:</label><br>
+							<label for="dropdownMenu1">Send to: <div id="recip" recipid=""></div></label><br>
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 							Contact group
 							<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-								<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Customers</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Employees</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Undefined</a></li>
+							<ul id="grouplist" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 							</ul>
 						</div>
 						
@@ -38,16 +35,16 @@
 						<a href="./mass.php">Back without sending</a>
 						
 						<!-- modal feedback -->
-						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="feedbackhead" aria-hidden="true">
 							<div class="modal-dialog modal-sm">
 								<div class="modal-content">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-											<h4 class="modal-title" id="mySmallModalLabel">Your message is being sent...</h4>
+											<h4 class="modal-title" id="feedbackhead">Working...</h4>
 										</div>
-										<div class="modal-body">
-											Status: Sending...
+										<div id="feedbackbody" class="modal-body">
+											Your message is being sent...
 										</div>
 									</div>
 								</div>
@@ -60,6 +57,11 @@
 		</div>
 		<?php include('./footer.php'); ?>
 		<script>
-				document.getElementById("send").addEventListener("click", transmitMassMessage, false);
+			openFBR("group").once("value",getGroupList);
+			document.getElementById("send").addEventListener("click", transmitMassMessage, false);
+			document.getElementById("grouplist").addEventListener("click", function(evt){
+				document.getElementById("recip").innerHTML=evt.target.innerHTML;
+				document.getElementById("recip").recipid=evt.target.id;
+			}, false);
 		</script>
 	</body></html>

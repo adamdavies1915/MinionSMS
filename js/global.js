@@ -5,26 +5,33 @@ function openFBR(attr)
 
 function transmitMassMessage()
 {
-	document.getElementById("messageText").disabled = true;
 
 	var url = "http://group15.pythonanywhere.com/webapi/masssms";
 	var method = "POST";
 	var postData = "number : 07731784340, message : Hello World!";
 	var async = true;
 	var request = new XMLHttpRequest();
-	// request.onload = function () {
-	//    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
-	//    var data = request.responseText; // Returned data, e.g., an HTML document.
-	// }
-	//NEEDED FOR FEEDBACK
+
+	request.onload = function () {
+	   status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+	   if(status==200) 
+	   {
+	   		document.getElementById("feedbackhead").innerHTML="Completed!";
+	   		document.getElementById("messageText").value= "";
+	   		document.getElementById("feedbackbody").innerHTML="Message sent.";
+	   }
+	   else 
+	   {
+	   		document.getElementById("feedbackhead").innerHTML="Oops!";
+	   		document.getElementById("feedbackbody").innerHTML="Something went wrong. Your message was not sent; please try again later.";
+	   }
+	}
 
 	request.open(method, url, async);
 	request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	request.send(postData);
 
-
-	document.getElementById("messageText").disabled = false;
-	document.getElementById("messageText").value = "";
+	
 }
 
 function createContact()
@@ -34,6 +41,16 @@ function createContact()
 	contact.push({
 		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
 	    number: document.getElementById("numberText").value
+	}, function(error){
+		if(error)
+		{
+			document.getElementById("feedbackheader").innerHTML="Oops!";
+	   		document.getElementById("feedbackbody").innerHTML="Something went wrong. Contact was not saved; please try again later.";
+		}
+		else
+		{
+			window.location.href="./masscontacts.php";
+		}
 	});
 
 }
@@ -49,6 +66,16 @@ function editContact(contactid)
 		if(exists) contacts.child(contactid).set({
 			name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
 	    	number: document.getElementById("numberText").value
+		}, function(error){
+			if(error)
+			{
+				document.getElementById("feedbackheader").innerHTML="Oops!";
+		   		document.getElementById("feedbackbody").innerHTML="Something went wrong. Contact was not saved; please try again later.";
+			}
+			else
+			{
+				window.location.href="./masscontacts.php";
+			}
 		});
 	});
 }
@@ -59,6 +86,16 @@ function createContactGroup()
 	var group = (openFBR("group"));
 	group.push({
 	    name: document.getElementById("groupText").value
+	}, function(error){
+		if(error)
+		{
+			document.getElementById("feedbackheader").innerHTML="Oops!";
+	   		document.getElementById("feedbackbody").innerHTML="Something went wrong. Group was not saved; please try again later.";
+		}
+		else
+		{
+			window.location.href="./masscontacts.php";
+		}
 	});
 
 }
@@ -191,6 +228,16 @@ function displayOutstanding(snapshot)
 	document.getElementById("outstandingTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
 
+function displayCompleted(snapshot)
+{
+	var tableContent ="";
+	snapshot.forEach(function(messagesnap) {
+		if(messagesnap.val().dealtwith)
+			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"markdone\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span>_</a></li><li role=\"presentation\"><a class=\"decline\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>_</a></li></ul></div></div></td></tr>";
+	});
+	document.getElementById("completedTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+}
+
 function messageTableFunctionality(evt)
 {
 	if(evt.target.className=="decline")
@@ -214,4 +261,14 @@ function deleteMessage(messageid)
 function markMessageDone(messageid)
 {
 	openFBR("messages/"+messageid+"/dealtwith").set(true);
+}
+
+function getGroupList(groups)
+{
+	var listcontent="";
+	groups.forEach(function(group){
+
+		listcontent = listcontent + "<li role=\"presentation\"><a id="+group.key()+" role=\"menuitem\" tabindex=\"-1\" href=\"#\">"+group.val().name+"</a></li>"
+	});
+	document.getElementById("grouplist").innerHTML = listcontent;
 }

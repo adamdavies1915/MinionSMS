@@ -7,7 +7,6 @@ switch ($pageName) {
         $extraItems=<<<EOS
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-    <li><a href="./mainmenu.php">Main Menu</a></li>
     <li><a href="./masscontacts.php">View contacts</a></li>
     <li><a href="./newcontact.php">Add new contact</a></li>
     <li><a href="./newcontactgroup.php">Add new group</a></li>
@@ -20,8 +19,7 @@ EOS;
     case "queue.php":
         $extraItems=<<<EOS
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="./mainmenu.php">Main Menu</a></li>
+          <ul class="nav nav-sidebar">      
             <li><a href="./masscontacts.php">View contacts</a></li>
             <li><a href="./newcontact.php">Add new contact</a></li>
             <li><a href="./newcontactgroup.php">Add new group</a></li>
@@ -31,8 +29,7 @@ EOS;
     default:
         $extraItems=<<<EOS
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="./mainmenu.php">Main Menu</a></li>
+          <ul class="nav nav-sidebar">      
             <li><a href="./masscontacts.php">View contacts</a></li>
             <li><a href="./newcontact.php">Add new contact</a></li>
             <li><a href="./newcontactgroup.php">Add new group</a></li>

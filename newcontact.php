@@ -40,10 +40,11 @@ if($_GET!=[]) $edit = true;?>
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-								<h4 class="modal-title" id="mySmallModalLabel">Your message is being sent...</h4>
+									<div id="feedbackheader">Working...</div>
 							</div>
-							<div class="modal-body">
-								Status: Sending...
+							<div id="feedbackbody" class="modal-body">
+								<?php if($edit) echo("Your changes are being saved...");
+									else echo("Adding customer..."); ?>
 							</div>
 						</div>
 					</div>
