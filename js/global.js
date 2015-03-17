@@ -8,7 +8,8 @@ function transmitMassMessage()
 
 	var url = "http://group15.pythonanywhere.com/webapi/masssms";
 	var method = "POST";
-	var postData = "number : 07731784340, message : Hello World!";
+	var postData = "group : "+document.getElementById("recip").parentElement.id+", message : "+document.getElementById("messageText").value;
+	;
 	var async = true;
 	var request = new XMLHttpRequest();
 

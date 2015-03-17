@@ -13,7 +13,7 @@
 						<br><br>
 						
 						<div class="dropdown">
-							<label for="dropdownMenu1">Send to: <div id="recip" recipid=""></div></label><br>
+							<label id="" for="dropdownMenu1">Send to: <div id="recip"></div></label><br>
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 							Contact group
 							<span class="caret"></span>
@@ -61,7 +61,7 @@
 			document.getElementById("send").addEventListener("click", transmitMassMessage, false);
 			document.getElementById("grouplist").addEventListener("click", function(evt){
 				document.getElementById("recip").innerHTML=evt.target.innerHTML;
-				document.getElementById("recip").recipid=evt.target.id;
+				document.getElementById("recip").parentElement.id=evt.target.id;
 			}, false);
 		</script>
 	</body></html>

@@ -12,8 +12,8 @@
 						Here you can edit the rules for:
 						<ul>
 							<li><a href="#collapseOne" class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseOne">Automated Replies</a></li>
-							<li><a href="#collapseTwo" class="collapsed" data-toggle="collapse" data-parent="#accordion"  aria-expanded="false" aria-controls="collapseTwo">Formatting Requirements</a></li>
-							<li><a href="#collapseThree" class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseThree">Notifications</a></li>
+							<!-- <li><a href="#collapseTwo" class="collapsed" data-toggle="collapse" data-parent="#accordion"  aria-expanded="false" aria-controls="collapseTwo">Formatting Requirements</a></li>
+							<li><a href="#collapseThree" class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseThree">Notifications</a></li> -->
 						</ul>
 					</div>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
