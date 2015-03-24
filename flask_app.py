@@ -5,6 +5,16 @@ from firebase import firebase
 import json
 from flask.ext.cors import CORS, cross_origin
 
+import os
+from urlparse import urlparse
+
+from twilio.rest.resources import Connection
+from twilio.rest.resources.connection import PROXY_TYPE_HTTP
+
+proxy_url = os.environ.get("http_proxy")
+host, port = urlparse(proxy_url).netloc.split(":")
+Connection.set_proxy_info(host, int(port), proxy_type=PROXY_TYPE_HTTP)
+
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -26,14 +36,28 @@ def sendResponse():
 def incoming_message():
 
     #get details of incoming message
-    senderNumber = request.values.get('From', None)
+    sender = request.values.get('From', None)
     messageBody = request.values.get('Body', None)
+    dealtWith = False
+
+    database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
 
     #then log the message
-    database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
-    messageData = {'message' : messageBody, 'number' : senderNumber}
-    result = database.post('/messages', messageData)
-    return "ok"
+    messageData = {'dealtwith' : dealtWith, 'message' : messageBody, 'number' : sender}
+    database.post('/messages', messageData)
+
+    if 'order' in str(messageBody).lower():
+        #process_order()
+        newMessageBody = "Thank you for your order. Your order number is h9843ru4hfu"
+
+        #client.messages.create(body=newMessageBody,
+        #                                     to = sender,
+        #                                     from_="+441255411083")
+
+        replyData = {'groupID' : 'group', 'message' : newMessageBody}
+        database.post('/outgoing', replyData)
+
+    return '200 OK'
 
 @app.route("/webapi/masssms", methods=['POST'])
 @cross_origin()
@@ -54,7 +78,7 @@ def sendSms():
 
 	  	# except twilio.TwilioRestException: eror handeling would be a very good idea
 	   #  	print e
-    return "ok"
+    return "200 OK"
 
 if __name__ == "__main__":
     app.run(debug=True)
