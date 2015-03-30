@@ -27,8 +27,8 @@
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
-									Automatic replies on first and subsequent texts from a number, time periods, etc.
-									<?php include('./exampleaccordioncontent.php'); ?>
+									<!-- Automatic replies on first and subsequent texts from a number, time periods, etc. -->
+									<table id="automationTable" style="width:100%;"></table>
 								</div>
 							</div>
 						</div>
@@ -67,5 +67,7 @@
 			</div>
 		</div>
 		<?php include('./footer.php'); ?>
-		
+		<script>
+			openFBR("rules/information/ifNewUser/rules").on("value", displayAutoRules);
+		</script>
 </body></html>

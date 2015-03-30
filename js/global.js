@@ -37,7 +37,6 @@ function transmitMassMessage()
 
 function createContact()
 {
-	//document.getElementById("contactForm").disabled = true;
 	var contact = (openFBR("contact"));
 	contact.push({
 		name : document.getElementById("firstNText").value+" "+document.getElementById("surNText").value,
@@ -83,7 +82,6 @@ function editContact(contactid)
 
 function createContactGroup()
 {
-	//document.getElementById("contactForm").disabled = true;
 	var group = (openFBR("group"));
 	group.push({
 	    name: document.getElementById("groupText").value
@@ -234,9 +232,33 @@ function displayCompleted(snapshot)
 	var tableContent ="";
 	snapshot.forEach(function(messagesnap) {
 		if(messagesnap.val().dealtwith)
-			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"markdone\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span>_</a></li><li role=\"presentation\"><a class=\"decline\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>_</a></li></ul></div></div></td></tr>";
+			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"></td></tr>";
 	});
 	document.getElementById("completedTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+}
+
+function traverseAutoSubrules(subrulessnap)
+{
+	var tableContent="";
+	subrulessnap.forEach(function(subrule){
+		tableContent=tableContent+"<th>subrulefound!</th>";
+		if(subrule.hasChild("subrules")) tableContent=tableContent+traverseAutoSubrules(subrule.child("subrules"));
+	});
+	return tableContent;
+}
+
+function displayAutoRules(snapshot)
+{
+	var tableContent ="";
+	snapshot.forEach(function(toplevelrule) {
+		tableContent = tableContent+"<tr id=\""+toplevelrule.key()+"\"><td>"+toplevelrule.key()+"</td><td>"+toplevelrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"addsub\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span>Add followon exchange...</a></li><li role=\"presentation\"><a class=\"edit\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Edit...</a></li><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>"
+			if(toplevelrule.hasChild("subrules")) 
+			{
+				console.dir(toplevelrule.child("subrules").key);
+				tableContent=tableContent+"<table><thead>"+traverseAutoSubrules(toplevelrule.child("subrules"))+"</thead><tbody></tbody></table>";
+			}
+	});
+	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
 
 function messageTableFunctionality(evt)
