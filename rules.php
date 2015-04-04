@@ -69,5 +69,6 @@
 		<?php include('./footer.php'); ?>
 		<script>
 			openFBR("rules/information/ifNewUser/rules").on("value", displayAutoRules);
+			document.getElementById("automationTable").addEventListener("click", autoTableFunctionality, false);
 		</script>
 </body></html>

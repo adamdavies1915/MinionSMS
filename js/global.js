@@ -176,6 +176,11 @@ function deleteContact(contactid)
 	});
 }
 
+function deleteAutoRule(autoid)
+{
+	openFBR("rules/information/ifNewUser/rules/"+autoid).remove();
+}
+
 function par6(evttarget)
 {
 	return evttarget.parentElement
@@ -236,12 +241,13 @@ function displayCompleted(snapshot)
 	document.getElementById("completedTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
 
-function traverseAutoSubrules(subrulessnap)
+function traverseAutoSubrules(subrulessnap,parent,parentin)
 {
 	var tableContent="";
+	//var subrulessnap = toplevelrule.child("subrules")
 	subrulessnap.forEach(function(subrule){
-		tableContent=tableContent+"<th>subrulefound!</th>";
-		if(subrule.hasChild("subrules")) tableContent=tableContent+traverseAutoSubrules(subrule.child("subrules"));
+		tableContent=tableContent+"<tr id=\""+parentin+"/subrules/"+subrule.key()+"\"><td>"+parent+"</td><td>"+subrule.key()+"</td><td>"+subrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>";
+		if(subrule.hasChild("subrules")) tableContent=tableContent+traverseAutoSubrules(subrule.child("subrules"),parent+" > "+subrule.val().reply,parentin+"/subrules/"+subrule.key());
 	});
 	return tableContent;
 }
@@ -250,14 +256,24 @@ function displayAutoRules(snapshot)
 {
 	var tableContent ="";
 	snapshot.forEach(function(toplevelrule) {
-		tableContent = tableContent+"<tr id=\""+toplevelrule.key()+"\"><td>"+toplevelrule.key()+"</td><td>"+toplevelrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"addsub\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span>Add followon exchange...</a></li><li role=\"presentation\"><a class=\"edit\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Edit...</a></li><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>"
+		tableContent = tableContent+"<tr id=\""+toplevelrule.key()+"\"><td>-</td><td>"+toplevelrule.key()+"</td><td>"+toplevelrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>"
 			if(toplevelrule.hasChild("subrules")) 
 			{
-				console.dir(toplevelrule.child("subrules").key);
-				tableContent=tableContent+"<table><thead>"+traverseAutoSubrules(toplevelrule.child("subrules"))+"</thead><tbody></tbody></table>";
+				tableContent=tableContent+traverseAutoSubrules(toplevelrule.child("subrules"),toplevelrule.val().reply,toplevelrule.key());
 			}
 	});
-	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Parent</th><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+}
+
+function autoTableFunctionality(evt)
+{
+	if(evt.target.className=="delete")
+	{
+		var autoid = par6(evt.target).id;
+		console.dir(autoid);
+		deleteAutoRule(autoid);
+		
+	}
 }
 
 function messageTableFunctionality(evt)
