@@ -262,7 +262,8 @@ function displayAutoRules(snapshot)
 				tableContent=tableContent+traverseAutoSubrules(toplevelrule.child("subrules"),toplevelrule.val().reply,toplevelrule.key());
 			}
 	});
-	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Parent</th><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
+	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Parent</th><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"<tr><td><select><option value=\"\">-</option></select></td><td><div class=\"input-group\"><input id=\"inputText\" type=\"text\" class=\"form-control\" placeholder=\"Input\" aria-describedby=\"basic-addon2\"></input></div></td><td><div class=\"input-group\"><input id=\"responseText\" type=\"text\" class=\"form-control\" placeholder=\"Response\" aria-describedby=\"basic-addon2\"></input></div></td><td><button type=\"button\" id=\"addNewAuto\" class=\"btn btn-default navbar-btn pull-right\">Add new</button></td></tr></tbody></table>";
+	document.getElementById("addNewAuto").addEventListener("click", addNewAutoRule, false);
 }
 
 function autoTableFunctionality(evt)
@@ -299,6 +300,11 @@ function deleteMessage(messageid)
 function markMessageDone(messageid)
 {
 	openFBR("messages/"+messageid+"/dealtwith").set(true);
+}
+
+function addNewAutoRule()
+{
+	openFBR("rules/information/ifNewUser/rules/"+document.getElementById("inputText").value).set({reply:document.getElementById("responseText").value});
 }
 
 function getGroupList(groups)
