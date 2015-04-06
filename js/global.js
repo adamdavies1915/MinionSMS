@@ -244,25 +244,35 @@ function displayCompleted(snapshot)
 function traverseAutoSubrules(subrulessnap,parent,parentin)
 {
 	var tableContent="";
-	//var subrulessnap = toplevelrule.child("subrules")
+	var optionsList ="";
 	subrulessnap.forEach(function(subrule){
 		tableContent=tableContent+"<tr id=\""+parentin+"/subrules/"+subrule.key()+"\"><td>"+parent+"</td><td>"+subrule.key()+"</td><td>"+subrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>";
-		if(subrule.hasChild("subrules")) tableContent=tableContent+traverseAutoSubrules(subrule.child("subrules"),parent+" > "+subrule.val().reply,parentin+"/subrules/"+subrule.key());
+		optionsList=optionsList+"<option value=\""+parentin+"/subrules/"+subrule.key()+"/subrules/"+"\">"+subrule.val().reply+"</option>";
+		if(subrule.hasChild("subrules")) 
+		{
+			var traversal = traverseAutoSubrules(subrule.child("subrules"),parent+" > "+subrule.val().reply,parentin+"/subrules/"+subrule.key());
+			tableContent=tableContent+traversal[0];
+			optionsList=optionsList+traversal[1];
+		}
 	});
-	return tableContent;
+	return [tableContent,optionsList];
 }
 
 function displayAutoRules(snapshot)
 {
 	var tableContent ="";
+	var optionsList ="";
 	snapshot.forEach(function(toplevelrule) {
 		tableContent = tableContent+"<tr id=\""+toplevelrule.key()+"\"><td>-</td><td>"+toplevelrule.key()+"</td><td>"+toplevelrule.val().reply+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"delete\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span>Delete</a></li></ul></div></div></td></tr>"
+		optionsList=optionsList+"<option value=\""+toplevelrule.key()+"/subrules/"+"\">"+toplevelrule.val().reply+"</option>";
 			if(toplevelrule.hasChild("subrules")) 
 			{
-				tableContent=tableContent+traverseAutoSubrules(toplevelrule.child("subrules"),toplevelrule.val().reply,toplevelrule.key());
+				var traversal = traverseAutoSubrules(toplevelrule.child("subrules"),toplevelrule.val().reply,toplevelrule.key());
+				tableContent=tableContent+traversal[0];
+				optionsList=optionsList+traversal[1];
 			}
 	});
-	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Parent</th><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"<tr><td><select><option value=\"\">-</option></select></td><td><div class=\"input-group\"><input id=\"inputText\" type=\"text\" class=\"form-control\" placeholder=\"Input\" aria-describedby=\"basic-addon2\"></input></div></td><td><div class=\"input-group\"><input id=\"responseText\" type=\"text\" class=\"form-control\" placeholder=\"Response\" aria-describedby=\"basic-addon2\"></input></div></td><td><button type=\"button\" id=\"addNewAuto\" class=\"btn btn-default navbar-btn pull-right\">Add new</button></td></tr></tbody></table>";
+	document.getElementById("automationTable").innerHTML = "<thead><tr><th>Parent</th><th>Input</th><th>Response</th></tr></thead><tbody>"+tableContent+"<tr><td><select id=\"parentSelect\"><option value=\"\">-</option>"+optionsList+"</select></td><td><div class=\"input-group\"><input id=\"inputText\" type=\"text\" class=\"form-control\" placeholder=\"Input\" aria-describedby=\"basic-addon2\"></input></div></td><td><div class=\"input-group\"><input id=\"responseText\" type=\"text\" class=\"form-control\" placeholder=\"Response\" aria-describedby=\"basic-addon2\"></input></div></td><td><button type=\"button\" id=\"addNewAuto\" class=\"btn btn-default navbar-btn pull-right\">Add new</button></td></tr></tbody></table>";
 	document.getElementById("addNewAuto").addEventListener("click", addNewAutoRule, false);
 }
 
@@ -304,7 +314,7 @@ function markMessageDone(messageid)
 
 function addNewAutoRule()
 {
-	openFBR("rules/information/ifNewUser/rules/"+document.getElementById("inputText").value).set({reply:document.getElementById("responseText").value});
+	openFBR("rules/information/ifNewUser/rules/"+document.getElementById("parentSelect").value+document.getElementById("inputText").value).set({reply:document.getElementById("responseText").value});
 }
 
 function getGroupList(groups)
