@@ -5,7 +5,7 @@ from firebase import firebase
 import json
 from flask.ext.cors import CORS, cross_origin
 
-# From pythonanywhere support
+# From pythonanywhere support- only use in python anywhere NOT localy
 import os
 from urlparse import urlparse
 
@@ -34,7 +34,7 @@ def sendResponse():
     return str(response)
 
 
-@app.route('/twilioapi', methods=['GET'])
+@app.route('/twilioapi', methods=['GET', 'POST'])
 def incoming_message():
 
     #get details of incoming message
@@ -48,18 +48,23 @@ def incoming_message():
     messageData = {'dealtwith' : dealtWith, 'message' : messageBody, 'number' : sender}
     database.post('/messages', messageData)
 
+    replyData = "OK" #change
+    response = twilio.twiml.Response()
+
+
     if 'order' in str(messageBody).lower():
         #process_order()
-        newMessageBody = "Thank you for your order. Your order number is h9843ru4hfu"
+        response.say("Thank you for your order. Your order number is h9843ru4hfu")
+        orderData = request.values.get("Body", None)
+        fromNumber = request.values.get("From", None)
+        database.post('/orders', )
 
-        #client.messages.create(body=newMessageBody,
-        #                                     to = sender,
-        #                                     from_="+441255411083")
+        # database.post('/outgoing', replyData)
 
-        replyData = {'groupID' : 'group', 'message' : newMessageBody}
-        database.post('/outgoing', replyData)
+    ## Otherwise Tree Responses
 
-    return '200 OK'
+
+    return str(response)
 
 @app.route("/webapi/masssms", methods=['POST'])
 @cross_origin()
