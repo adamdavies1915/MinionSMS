@@ -55,9 +55,10 @@ def incoming_message():
     if 'order' in str(messageBody).lower():
         #process_order()
         response.say("Thank you for your order. Your order number is h9843ru4hfu")
-        orderData = request.values.get("Body", None)
+        orderBody = request.values.get("Body", None)
         fromNumber = request.values.get("From", None)
-        database.post('/orders', )
+        orderData = {'orderBody': orderBody, 'fromNumber': fromNumber}
+        database.post('/orders', orderData)
 
         # database.post('/outgoing', replyData)
 
@@ -86,6 +87,13 @@ def sendSms():
 	  	# except twilio.TwilioRestException: eror handeling would be a very good idea
 	   #  	print e
     return "200 OK"
+
+@app.route("/webapi/orderComplete", methods=['POST'])
+@cross_origin()
+def completeOrder():
+    database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
+    request.json.get("orderID")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
