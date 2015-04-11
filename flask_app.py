@@ -5,18 +5,18 @@ from firebase import firebase
 import json
 from flask.ext.cors import CORS, cross_origin
 
-# From pythonanywhere support- only use in python anywhere NOT localy
-# import os
-# from urlparse import urlparse
+From pythonanywhere support- only use in python anywhere NOT localy
+import os
+from urlparse import urlparse
 
-# from twilio.rest.resources import Connection
-# from twilio.rest.resources.connection import PROXY_TYPE_HTTP
+from twilio.rest.resources import Connection
+from twilio.rest.resources.connection import PROXY_TYPE_HTTP
 
-# proxy_url = os.environ.get("http_proxy")
-# host, port = urlparse(proxy_url).netloc.split(":")
-# Connection.set_proxy_info(host, int(port), proxy_type=PROXY_TYPE_HTTP)
+proxy_url = os.environ.get("http_proxy")
+host, port = urlparse(proxy_url).netloc.split(":")
+Connection.set_proxy_info(host, int(port), proxy_type=PROXY_TYPE_HTTP)
 
-#end
+end
 
 app = Flask(__name__)
 cors = CORS(app)
