@@ -9,7 +9,7 @@
         <br/>
         <div class="row" style="width:100%;">
           <div class="col-md-3 col-md-offset-3">
-            <a href="./mass.php">
+            <a href="./masscontacts.php"> <!-- will need to be changed eventually -->
               <h4><span class="glyphicon glyphicon-bullhorn"></span><br/>Send and Manage<br/> Mass Messages</h4>
             </a>
           </div>

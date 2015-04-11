@@ -12,9 +12,9 @@
             What would you like to do?
             <br><br>
             
-            <!-- sort out <a href="./masscontacts.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> View contacts</button></a><br>
+            <a href="./masscontacts.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> View contacts</button></a><br>
             <a href="./newcontact.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new contact</button></a><br>
-            <a href="./sendmass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send a mass message</button></a><br> -->
+            <a href="./sendmass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send a mass message</button></a><br>
           </div>
         </div>
       </div>

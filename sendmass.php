@@ -32,7 +32,7 @@
 						<button id="send" type="button" class="btn btn-default" data-toggle="modal" data-target=".modal">
 						<span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send
 						</button>
-						<a href="./mass.php">Back without sending</a>
+						<a href="./masscontacts.php">Back without sending</a> <!-- needs to be changed! -->
 						
 						<!-- modal feedback -->
 						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="feedbackhead" aria-hidden="true">

@@ -17,7 +17,7 @@
             <br>
             
             <button id="create" type="button" class="btn btn-default" data-toggle="modal" data-target=".modal"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button></a>
-            <a href="./mass.php">Back without saving</a>
+            <a href="./masscontacts.php">Back without saving</a>
             
           </div>
         </div>
