@@ -291,26 +291,29 @@ function messageTableFunctionality(evt)
 {
 	if(evt.target.className=="decline")
 	{
-		var messageid = par6(evt.target).id;
-		deleteMessage(messageid);
+		var url = "http://group15.pythonanywhere.com/webapi/orderdeclined";
 		
 	}
+	
+	if(evt.target.className=="accept"){
+		var url = "http://group15.pythonanywhere.com/webapi/orderaccepted";
+	}
+
 	if(evt.target.className=="markdone")
 	{
-		var messageid = par6(evt.target).id;
-		markMessageDone(messageid);
+		var url = "http://group15.pythonanywhere.com/webapi/ordercompleted";
 	}
+
+	var method = "POST";
+	var messageid = par6(evt.target).id;
+	postData = JSON.stringify({"orderID":messageid})
+	var async = true;
+	var request = new XMLHttpRequest();
+	request.open(method, url, async);
+	request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	request.send(postData);
 }
 
-function deleteMessage(messageid)
-{
-	openFBR("messages/"+messageid).remove();
-}
-
-function markMessageDone(messageid)
-{
-	openFBR("messages/"+messageid+"/dealtwith").set(true);
-}
 
 function addNewAutoRule()
 {
