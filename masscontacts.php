@@ -10,10 +10,11 @@
           <h1 class="page-header">Contact groups</h1>
 			<div class="well">
 				Review, edit and add new contacts here!
-				<br>
-				<br>
+				<br/>
+				<br/>
 				<a href="./newcontact.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new contact</button></a>
 				<a href="./newcontactgroup.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new group</button></a>
+            	<a href="./sendmass.php"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send a mass message</button></a><br>
 			</div>
 			  
 			<div class="panel panel-default">
