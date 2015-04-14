@@ -54,7 +54,7 @@ def incoming_message():
                                                                #for order completion ect.
         orderData = {'dealtwith': False, 'message': orderBody, 'number': fromNumber, 'orderID': orderID}
         database.patch('/messages/'+orderID, orderData)
-        response.say("Thank you for your order. Your order is currently being processed and will be accepted shortly. Your order id is "+orderID)
+        response.message("Thank you for your order. Your order is currently being processed and will be accepted shortly. Your order id is "+orderID)
 
     ## Otherwise Tree Responses
 
