@@ -64,25 +64,19 @@ def incoming_message():
 @app.route("/webapi/masssms", methods=['POST'])
 @cross_origin()
 def sendSms():
-    # if not request.json: # or not "title" in request.json:
-    # abort(400) #currently will accept any post request
-    # return request.json.get("group")
     database = firebase.FirebaseApplication('https://group15.firebaseio.com/', None)
     result = database.get("group/", request.json.get("group")+"/contacts")
     if result == None:
         return "Error"
     for x in result:
-        # try:
         if x != "":
             number = database.get("contact/", result[x]["contactid"])["number"]
             message = client.messages.create(to=number, from_="+441255411083",
                                          body=request.json.get("message"))
-
-        # except twilio.TwilioRestException: eror handeling would be a very good idea
-       #    print e
+          
     return "200 OK"
 
-@app.route("/webapi/ordercomplete", methods=['POST'])
+@app.route("/webapi/orderready", methods=['POST'])
 @cross_origin()
 def completeOrder():
 
@@ -92,11 +86,9 @@ def completeOrder():
     number = database.get("messages/"+orderID+"/number", None)
     message = "Your order is now ready." 
     client.messages.create(to=number, from_="+441255411083",
-                                         body=message)
+                                        body=message)
 
-
-
-    database.patch('/messages/'+orderID, {'dealtwith': True})
+    database.patch('/messages/'+orderID, {'status': 'ready'})
     return  "200 OK"
 
 
@@ -110,6 +102,7 @@ def acceptOrder():
     message = "Your order has been accepted" 
     client.messages.create(to=number, from_="+441255411083",
                                          body=message)
+    database.patch('/messages/'+orderID, {'status': 'accepted'})
     return "200 OK"
 
 @app.route("/webapi/orderdeclined", methods=['POST'])
@@ -124,6 +117,7 @@ def declineOrder():
                                          body=message)
 
     database.delete('/messages/'+orderID, None)
+
     return "200 OK"
 
 if __name__ == "__main__":
