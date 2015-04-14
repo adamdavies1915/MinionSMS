@@ -296,7 +296,7 @@ function messageTableFunctionality(evt)
 	if(evt.target.className=="accept"){
 		var url = "http://group15.pythonanywhere.com/webapi/orderaccepted";
 	}
-	if(evt.target.className=="ready"){
+		if(evt.target.className=="ready"){
 		var url = "http://group15.pythonanywhere.com/webapi/orderready";
 	}
 	if(evt.target.className=="markdone")

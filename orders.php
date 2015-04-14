@@ -14,8 +14,6 @@
             <ul>
               <li><a href="./queue.php">View list of orders to be dealt with</a></li>
               <li><a href="./rules.php">Change formatting and reply automation rules</a></li>
-              <li><a href="">Do something else</a></li>
-              <li><a href="">Do another thing</a></li>
             </ul>
           </div>
           <?php include('./latest.php'); ?>
