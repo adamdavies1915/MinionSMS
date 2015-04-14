@@ -225,8 +225,8 @@ function displayOutstanding(snapshot)
 {
 	var tableContent ="";
 	snapshot.forEach(function(messagesnap) {
-		if(!messagesnap.val().dealtwith)
-			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"accept\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Accept</a></li><li role=\"presentation\"><a class=\"markdone\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Mark Done</a></li><li role=\"presentation\"><a class=\"decline\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span> Decline </a></li></ul></div></div></td></tr>";
+		if(messagesnap.val().status !== "completed")
+			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"accept\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Accept</a></li><li role=\"presentation\"><a class=\"ready\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Ready</a></li><li role=\"presentation\"><a class=\"contact\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Add to Contacts</a></li><li role=\"presentation\"><a class=\"marketing\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Add to Marketing</a></li><li role=\"presentation\"><a class=\"markdone\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Mark Done</a></li><li role=\"presentation\"><a class=\"decline\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-remove\"></span> Decline </a></li></ul></div></div></td></tr>";
 	});
 	document.getElementById("outstandingTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
@@ -235,8 +235,8 @@ function displayCompleted(snapshot)
 {
 	var tableContent ="";
 	snapshot.forEach(function(messagesnap) {
-		if(messagesnap.val().dealtwith)
-			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"></td></tr>";
+		if(messagesnap.val().status === "completed")
+			tableContent = tableContent+"<tr id=\""+messagesnap.key()+"\"><td>"+messagesnap.val().number+"</td><td>"+messagesnap.val().message+"</td><td><div class=\"dropdown pull-right\"><div class=\"pull-right\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-toggle=\"dropdown\" aria-expanded=\"true\">Action<span class=\"caret\"></span></button><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\"><li role=\"presentation\"><a class=\"contact\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Add to Contacts</a></li><li role=\"presentation\"><a class=\"marketing\" role=\"menuitem\" tabindex=\"-1\" href=\"#\"><span aria-hidden=\"true\" class=\"pull-left glyph glyph-ok\"></span> Add to Marketing</a></li></ul></div></div></td></tr>";
 	});
 	document.getElementById("completedTable").innerHTML = "<thead><tr><th>Orders</th></tr></thead><tbody>"+tableContent+"</tbody></table>";
 }
@@ -292,18 +292,39 @@ function messageTableFunctionality(evt)
 	if(evt.target.className=="decline")
 	{
 		var url = "http://group15.pythonanywhere.com/webapi/orderdeclined";
-		
 	}
-	
 	if(evt.target.className=="accept"){
 		var url = "http://group15.pythonanywhere.com/webapi/orderaccepted";
 	}
-
+	if(evt.target.className=="ready"){
+		var url = "http://group15.pythonanywhere.com/webapi/orderready";
+	}
 	if(evt.target.className=="markdone")
 	{
-		var url = "http://group15.pythonanywhere.com/webapi/ordercompleted";
+		var messageid = par6(evt.target).id;
+		openFBR("messages/"+messageid+"/status").set("completed");
 	}
-
+	if(evt.target.className=="contact"){
+		var contactName = prompt("Please enter the contact name");
+		var messageid = par6(evt.target).id;		
+		openFBR("messages/"+messageid).on("value", function(snapshot) {
+			contactRef = openFBR("contact");
+			contactRef.push({name : contactName,
+	    number: snapshot.val().number})
+		});		
+	}
+	if(evt.target.className=="marketing"){
+		var contactName = prompt("Please check the customer is happy for their details to be used for marketing and enter their name");
+		var messageid = par6(evt.target).id;
+		openFBR("messages/"+messageid).on("value", function(snapshot) {
+			contactRef = openFBR("contact");
+			console.log(contactRef);
+			var contactid = contactRef.push({name : contactName,
+	    	number: snapshot.val().number});
+	    	console.log(contactid.key());
+			openFBR("group/-JmsvH2CIUIvMSrRePew/contacts").push({"contactid": contactid.key()});
+		});
+	}
 	var method = "POST";
 	var messageid = par6(evt.target).id;
 	postData = JSON.stringify({"orderID":messageid})
