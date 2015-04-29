@@ -1,11 +1,9 @@
-from flask import Flask, request, redirect, jsonify
+from flask import Flask, request
 import twilio.twiml
 from twilio.rest import TwilioRestClient
 from firebase import firebase
-import json
 from flask.ext.cors import CORS, cross_origin
 import ConfigParser
-import time
 
 # From pythonanywhere support- only use in python anywhere NOT localy
 import os
@@ -31,16 +29,13 @@ client = TwilioRestClient(account_sid, auth_token)
 Config = ConfigParser.RawConfigParser()
 Config.read('mysite/config.cfg')
 twilioNumber = Config.get('data', 'number')
-print twilioNumber
-twilioNumber = +441173252277
-print twilioNumber
 newOrderMessage = Config.get('data', 'new')
 declinedMessage = Config.get('data', 'declined')
 acceptedMessage = Config.get('data', 'accepted')
 readyMessage = Config.get('data', 'ready')
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST']) #for testing only!
 def sendResponse():
     print "message received"
     response = twilio.twiml.Response()
@@ -54,10 +49,6 @@ def incoming_message():
     #get details of incoming message
     sender = request.values.get('From', None)
     messageBody = request.values.get('Body', None)
-    contactsList = database.get('/contact', None)
-    dealtWith = False
-
-
     replyData = "500" #server error if something breaks
     response = twilio.twiml.Response()
 
@@ -70,6 +61,7 @@ def incoming_message():
         orderData = {'dealtwith': False, 'message': orderBody, 'number': fromNumber, 'orderID': orderID}
         database.patch('/messages/'+orderID, orderData)
         response.message(newOrderMessage + " "+orderID)
+        replyData = "200 OK"
 
      #if not an order use auto rules
     else:
@@ -88,8 +80,9 @@ def incoming_message():
                 if sender == database.get('/autoStates/' + user + '/number', None):
                     subRules(database.get('/autoStates/' + user + '/pathway', None), sender, messageBody, database, user)
 
+        replyData = "200 OK"
 
-    return str(response)
+    return replyData
 
 def subRules(pathway, number, lastMsg, db, autoID):
 
@@ -115,7 +108,7 @@ def sendSms():
     for x in result:
         if x != "":
             number = database.get("contact/", result[x]["contactid"])["number"]
-            message = client.messages.create(to=number, from_=twilioNumber,
+            client.messages.create(to=number, from_=twilioNumber, #should have error checking at some point
                                          body=request.json.get("message"))
 
     return "200 OK"
